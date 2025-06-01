@@ -14,7 +14,7 @@ git clone https://github.com/igrrsantos/learnai.git
 cd learnai
 ```
 <h3>2. Configure as variáveis de ambiente</h3>
-Configure o arquivo ```src/main/resources/application.properties``` com:
+Configure o arquivo ``src/main/resources/application.properties`` com:
 ```
 jwt.secret=uma-chave-secreta-segura-aqui
 jwt.expiration=86400000
@@ -28,7 +28,7 @@ mvn spring-boot:run
 
 ## Rodando com Docker
 <h3>1. Configure as variáveis de ambiente</h3>
-   O projeto já possui um arquivo ```Dockerfile``` e ```docker-compose.yml```.
+   O projeto já possui um arquivo ``Dockerfile`` e ``docker-compose.yml``.
 <h3>2. Build da imagem Docker</h3>
 ```
 docker build -t learnai-api .
@@ -47,9 +47,7 @@ docker run -d \
 - O serviço ficará disponível em ```http://localhost:8080```.
 
 <h3>4. Depois basta rodar:</h3>
-```
-docker-compose up -d
-```
+``docker-compose up -d``
 
 ## Uso
 <h3>Cadastro de Usuário</h3>
