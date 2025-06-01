@@ -1,13 +1,13 @@
-## LearnAI API
+# LearnAI API
 Projeto de backend em Java com Spring Boot para geração de conteúdos educacionais com IA, autenticação JWT e documentação automática via Swagger.
 
-## Funcionalidades
+# Funcionalidades
 - Cadastro e autenticação de usuários (JWT)
 - Endpoint protegido para geração de conteúdo de aprendizado
 - Integração com OpenAI
 - Documentação automática da API com Swagger (OpenAPI)
 
-## Instalação
+# Instalação
 ## 1. Clone o repositório
 ```
 git clone https://github.com/igrrsantos/learnai.git
@@ -26,7 +26,7 @@ mvn clean package
 mvn spring-boot:run
 ```
 
-## Rodando com Docker
+# Rodando com Docker
 ## 1. Configure as variáveis de ambiente
    O projeto já possui um arquivo ``Dockerfile`` e ``docker-compose.yml``.
 ## 2. Build da imagem Docker
@@ -44,17 +44,17 @@ docker run -d \
   learnai-api
 ```
 - Substitua os valores das variáveis conforme necessário.
-- O serviço ficará disponível em ```http://localhost:8080```.
+- O serviço ficará disponível em ``http://localhost:8080``.
 
 ## 4. Depois basta rodar:
 ``docker-compose up -d``
 
-## Uso
+# Uso
 ## Cadastro de Usuário
 
-Endpoint: POST /api/auth/register
+Endpoint: ``POST /api/auth/register``
 
-Body JSON:
+### Body JSON:
 ```
 {
   "email": "usuario@exemplo.com",
@@ -65,30 +65,30 @@ Body JSON:
 ## Login
 Endpoint: POST /api/auth/login
 
-Body JSON:
+### Body JSON:
 ```
 {
 "email": "usuario@exemplo.com",
 "password": "senha123"
 }
 ```
-Resposta:
+### Resposta:
 ```
 {
 "token": "eyJhbGciOiJIUzI1NiJ9..."
 }
 ```
 
-## Gerar Conteúdo de Aprendizado
+# Gerar Conteúdo de Aprendizado
 Endpoint protegido: ```POST /api/learnai```
 
-Headers:
+### Headers:
 ```
 Authorization: Bearer <token_jwt>
 Content-Type: application/json
 ```
 
-Body JSON:
+### Body JSON:
 ```
 {
 "topic": "Revolução Francesa",
