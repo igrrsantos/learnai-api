@@ -1,16 +1,15 @@
 package com.learnai.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learnai.config.SecurityConfigTest;
 import com.learnai.dto.UserRegistrationDTO;
 import com.learnai.entity.User;
 import com.learnai.factory.UserFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import com.learnai.service.UserService;
 import static org.mockito.Mockito.when;
@@ -20,8 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
-@ActiveProfiles("test")
-@Import(SecurityConfigTest.class)
+@TestConfiguration
+@Profile("test")
 public class AuthControllerTest {
 
     @Autowired
