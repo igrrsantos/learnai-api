@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: CI
 
 on:
   push:
@@ -11,18 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Configurar Java
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
           distribution: 'temurin'
-          cache: 'maven'
+          java-version: '21'
 
-      - name: Run tests
-        run: mvn -B test
-        env:
-          SPRING_PROFILES_ACTIVE: test
-          SPRING_SECURITY_USER_NAME: testuser
-          SPRING_SECURITY_USER_PASSWORD: testpass
+      - name: Permitir execução dos scripts do Maven Wrapper
+        run: chmod +x mvnw
+
+      - name: Build com Maven
+        run: ./mvnw clean package --no-transfer-progress
+
+      - name: Rodar testes
+        run: ./mvnw test --no-transfer-progress
+
+      - name: Upload do artefato gerado
+        uses: actions/upload-artifact@v4
+        with:
+          name: learnai-jar
+          path: target/*.jar
