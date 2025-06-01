@@ -1,7 +1,6 @@
 package com.learnai.factory;
 
 import com.learnai.entity.User;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
