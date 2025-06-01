@@ -26,6 +26,11 @@ jobs:
       - name: Build com Maven
         run: mvn clean package -DskipTests
 
+      - name: Definir variáveis de ambiente sensíveis para o Maven
+        run: |
+          echo "jwt.secret=JvcyAJAjrd1ofcA+G6Sq/NcvmZdPfgafLj2uV2B/ZqU=" >> src/main/resources/application.properties
+          echo "jwt.expiration=86400000" >> src/main/resources/application.properties
+
       - name: Rodar testes
         run: mvn test --no-transfer-progress
 
