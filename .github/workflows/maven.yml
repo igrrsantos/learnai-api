@@ -24,4 +24,4 @@ jobs:
         run: mvn -B test
         env:
           SPRING_PROFILES_ACTIVE: test
-          SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.H2Dialect
+          SPRING_FLYWAY_ENABLED: false
