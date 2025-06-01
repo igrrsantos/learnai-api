@@ -19,7 +19,6 @@ public class UserRegistrationDTO {
 
     // Getters and Setters
 
-
     public String getEmail() {
         return email;
     }

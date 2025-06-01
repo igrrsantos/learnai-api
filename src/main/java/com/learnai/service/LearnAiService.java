@@ -23,7 +23,6 @@ public class LearnAiService {
             String template = promptService.loadPromptTemplate("prompts/learnai-prompt.txt");
             String prompt = promptService.preparePrompt(template, request.getTopic(), request.getLevel());
             String aiResponse = openAiService.sendMessage(prompt);
-            System.out.println(aiResponse);
             return objectMapper.readValue(aiResponse, LearnAiResponse.class);
         } catch (Exception e) {
             e.printStackTrace();
