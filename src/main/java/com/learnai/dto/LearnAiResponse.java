@@ -10,6 +10,39 @@ public class LearnAiResponse {
 
     // Getters e Setters
 
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public List<String> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<String> topics) {
+        this.topics = topics;
+    }
+
+    public List<QuizItem> getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(List<QuizItem> quiz) {
+        this.quiz = quiz;
+    }
+
+    public List<String> getTips() {
+        return tips;
+    }
+
+    public void setTips(List<String> tips) {
+        this.tips = tips;
+    }
+
     public static class QuizItem {
         private String question;
         private List<String> options;

@@ -1,27 +1,25 @@
 package com.learnai.service;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
+import java.nio.file.Files;
 
 @Service
 public class PromptService {
 
-    private final ResourceLoader resourceLoader;
-
-    public PromptService(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
+    public String loadPromptTemplate(String filePath) throws Exception {
+        ClassPathResource resource = new ClassPathResource(filePath);
+        byte[] bytes = Files.readAllBytes(resource.getFile().toPath());
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 
-    public String loadPromptTemplate(String filePath) throws Exception {
-        Resource resource = resourceLoader.getResource("classpath:" + filePath);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))) {
-            return reader.lines().collect(Collectors.joining("\n"));
+    public String preparePrompt(String template, String topic, String level) {
+        if (topic == null || level == null) {
+            throw new IllegalArgumentException("Os parâmetros 'topic' e 'level' não podem ser nulos.");
         }
+        return template
+                .replace("{topic}", topic)
+                .replace("{level}", level);
     }
 }

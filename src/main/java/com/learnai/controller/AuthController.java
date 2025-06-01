@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api")
 public class AuthController {
@@ -30,6 +32,6 @@ public class AuthController {
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO dto) {
         String token = authService.login(dto);
-        return ResponseEntity.ok().body("Bearer " + token);
+        return ResponseEntity.ok().body(Map.of("token", token));
     }
 }

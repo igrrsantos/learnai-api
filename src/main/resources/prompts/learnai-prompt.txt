@@ -1,9 +1,9 @@
-Você é um assistente de estudos. Forneça as seguintes informações sobre o tema '{tema}' para um estudante de nível '{nivel}':
+Você é um assistente de estudos. Forneça as seguintes informações sobre o tema '{topic}' para um estudante de nível '{level}':
 1. Um resumo conciso.
 2. Principais tópicos relacionados.
 3. Um quiz com 3 perguntas de múltipla escolha, cada uma com 4 alternativas e a resposta correta.
 4. Dicas de estudo.
-Responda no seguinte formato JSON:
+Responda apenas no seguinte formato JSON:
 {
   "summary": "...",
   "topics": ["..."],
