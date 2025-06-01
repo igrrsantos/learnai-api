@@ -20,8 +20,9 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run tests with test profile
+      - name: Run tests
         run: mvn -B test
         env:
           SPRING_PROFILES_ACTIVE: test
-          SPRING_FLYWAY_ENABLED: false
+          SPRING_SECURITY_USER_NAME: testuser
+          SPRING_SECURITY_USER_PASSWORD: testpass
