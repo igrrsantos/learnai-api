@@ -8,32 +8,32 @@ Projeto de backend em Java com Spring Boot para geração de conteúdos educacio
 - Documentação automática da API com Swagger (OpenAPI)
 
 ## Instalação
-<h3>1. Clone o repositório</h3>
+## 1. Clone o repositório
 ```
 git clone https://github.com/igrrsantos/learnai.git
 cd learnai
 ```
-<h3>2. Configure as variáveis de ambiente</h3>
+## 2. Configure as variáveis de ambiente
 Configure o arquivo ``src/main/resources/application.properties`` com:
 ```
 jwt.secret=uma-chave-secreta-segura-aqui
 jwt.expiration=86400000
 openai.api.key=sua-api-key-openai
 ```
-<h3>3. Instale as dependências e rode o projeto</h3>
+## 3. Instale as dependências e rode o projeto
 ```
 mvn clean package
 mvn spring-boot:run
 ```
 
 ## Rodando com Docker
-<h3>1. Configure as variáveis de ambiente</h3>
+## 1. Configure as variáveis de ambiente
    O projeto já possui um arquivo ``Dockerfile`` e ``docker-compose.yml``.
-<h3>2. Build da imagem Docker</h3>
+## 2. Build da imagem Docker
 ```
 docker build -t learnai-api .
 ```
-<h3>3. Rode o container passando as variáveis necessárias:</h3>
+## 3. Rode o container passando as variáveis necessárias:
 ```
 docker run -d \
   -p 8080:8080 \
@@ -46,11 +46,11 @@ docker run -d \
 - Substitua os valores das variáveis conforme necessário.
 - O serviço ficará disponível em ```http://localhost:8080```.
 
-<h3>4. Depois basta rodar:</h3>
+## 4. Depois basta rodar:
 ``docker-compose up -d``
 
 ## Uso
-<h3>Cadastro de Usuário</h3>
+## Cadastro de Usuário
 
 Endpoint: POST /api/auth/register
 
@@ -62,7 +62,7 @@ Body JSON:
 }
 ```
 
-<h3>Login</h3>
+## Login
 Endpoint: POST /api/auth/login
 
 Body JSON:
