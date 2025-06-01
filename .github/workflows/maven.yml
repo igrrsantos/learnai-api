@@ -7,12 +7,13 @@ on:
     branches: [ "main", "master" ]
 
 env:
-  MAVEN_OPTS: -Djava.security.egd=file:/dev/./urandom
-  SPRING_PROFILES_ACTIVE: test  # Força H2 em testes
+  MAVEN_OPTS: -Xmx2048m -Djava.security.egd=file:/dev/./urandom
+  SPRING_PROFILES_ACTIVE: test  # Força uso do H2
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
@@ -27,14 +28,16 @@ jobs:
       - name: Cache Maven dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.m2
+          path: |
+            ~/.m2
+            target/
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2-
 
-      - name: Build and run unit tests (H2)
-        run: mvn -B test
+      - name: Run unit tests with H2
+        run: mvn -B clean test
         env:
-          SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb
+          SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
           SPRING_DATASOURCE_USERNAME: sa
           SPRING_DATASOURCE_PASSWORD:
 
@@ -42,11 +45,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports
-          path: |
-            **/target/surefire-reports
-            **/target/failsafe-reports
-          retention-days: 3
+          name: unit-test-reports
+          path: target/surefire-reports
+          retention-days: 1
 
       - name: Upload coverage report
         if: success()
@@ -54,11 +55,8 @@ jobs:
         with:
           name: jacoco-report
           path: target/site/jacoco
-          retention-days: 3
-      
-      - name: SonarCloud Scan
+          retention-days: 1
+
+      - name: Build JAR
         if: success()
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B package -DskipTests
