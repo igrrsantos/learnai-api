@@ -24,7 +24,7 @@ jobs:
         run: chmod +x mvnw
 
       - name: Build com Maven
-        run: mvn clean package --e
+        run: mvn clean package -X
 
       - name: Rodar testes
         run: mvn test --no-transfer-progress
