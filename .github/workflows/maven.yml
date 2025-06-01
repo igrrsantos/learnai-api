@@ -7,8 +7,8 @@ on:
     branches: [ "main", "master" ]
 
 env:
-  MAVEN_OPTS: -Xmx2048m -Djava.security.egd=file:/dev/./urandom
-  SPRING_PROFILES_ACTIVE: test  # Força uso do H2
+  MAVEN_OPTS: -Xmx2048m
+  SPRING_PROFILES_ACTIVE: test
 
 jobs:
   build:
@@ -32,31 +32,18 @@ jobs:
             ~/.m2
             target/
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2-
 
-      - name: Run unit tests with H2
+      - name: Run tests with H2
         run: mvn -B clean test
         env:
           SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
           SPRING_DATASOURCE_USERNAME: sa
           SPRING_DATASOURCE_PASSWORD:
+          SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.H2Dialect
 
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unit-test-reports
+          name: test-reports
           path: target/surefire-reports
-          retention-days: 1
-
-      - name: Upload coverage report
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: jacoco-report
-          path: target/site/jacoco
-          retention-days: 1
-
-      - name: Build JAR
-        if: success()
-        run: mvn -B package -DskipTests
