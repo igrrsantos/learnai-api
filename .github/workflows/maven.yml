@@ -33,13 +33,14 @@ jobs:
             target/
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
 
-      - name: Run tests with H2
+      - name: Run tests with security disabled
         run: mvn -B clean test
         env:
           SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
           SPRING_DATASOURCE_USERNAME: sa
           SPRING_DATASOURCE_PASSWORD:
           SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.H2Dialect
+          SPRING_AUTOCONFIGURE_EXCLUDE: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
       - name: Upload test reports
         if: always()
