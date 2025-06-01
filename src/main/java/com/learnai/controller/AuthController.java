@@ -21,13 +21,13 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/auth/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserRegistrationDTO dto) {
         User user = userService.register(dto);
         return ResponseEntity.ok("Usuário registrado com sucesso: " + user.getEmail());
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO dto) {
         String token = authService.login(dto);
         return ResponseEntity.ok().body("Bearer " + token);

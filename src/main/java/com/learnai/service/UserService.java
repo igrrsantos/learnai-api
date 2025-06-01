@@ -27,7 +27,6 @@ public class UserService {
         }
 
         User user = new User();
-        // Não definir o ID manualmente; permitir que o Hibernate o gere
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setFullName(dto.getFullName());
