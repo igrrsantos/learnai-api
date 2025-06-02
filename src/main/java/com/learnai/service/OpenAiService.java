@@ -21,27 +21,22 @@ public class OpenAiService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public String sendMessage(String userMessage) {
-        // Cria a estrutura da mensagem
         Map<String, Object> message = new HashMap<>();
         message.put("role", "user");
         message.put("content", userMessage);
 
-        // Cria o corpo da requisição
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("model", model);
         requestBody.put("messages", Collections.singletonList(message));
 
-        // Configura os headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey);
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
 
-        // Envia a requisição
         ResponseEntity<Map> response = restTemplate.postForEntity(apiUrl, request, Map.class);
 
-        // Extrai a resposta
         if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
             List<Map<String, Object>> choices = (List<Map<String, Object>>) response.getBody().get("choices");
             if (choices != null && !choices.isEmpty()) {
