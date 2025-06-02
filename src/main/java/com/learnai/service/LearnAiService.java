@@ -5,6 +5,10 @@ import com.learnai.dto.LearnAiRequest;
 import com.learnai.dto.LearnAiResponse;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 @Service
 public class LearnAiService {
 
@@ -20,7 +24,11 @@ public class LearnAiService {
 
     public LearnAiResponse processRequest(LearnAiRequest request) {
         try {
-            String template = promptService.loadPromptTemplate("prompts/learnai-prompt.txt");
+            InputStream is = getClass().getClassLoader().getResourceAsStream("prompts/learnai-prompt.txt");
+            if (is == null) {
+                throw new FileNotFoundException("Arquivo de prompt não encontrado no classpath!");
+            }
+            String template = new String(is.readAllBytes(), StandardCharsets.UTF_8);
             String prompt = promptService.preparePrompt(template, request.getTopic(), request.getLevel());
             String aiResponse = openAiService.sendMessage(prompt);
             return objectMapper.readValue(aiResponse, LearnAiResponse.class);
