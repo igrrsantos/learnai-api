@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learnai.dto.UserRegistrationDTO;
 import com.learnai.entity.User;
 import com.learnai.factory.UserFactory;
+import com.learnai.service.OpenAiService;
 import com.learnai.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class AuthControllerTest {
 
     @MockBean
     private UserDetailsService userDetailsService;
+
+    @MockBean
+    private OpenAiService openAiService;
 
     @Autowired
     private ObjectMapper objectMapper;
