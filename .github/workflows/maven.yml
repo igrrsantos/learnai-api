@@ -23,9 +23,6 @@ jobs:
       - name: Permitir execução dos scripts do Maven Wrapper
         run: chmod +x mvnw
 
-      - name: Build com Maven
-        run: mvn clean package
-
       - name: Definir variáveis de ambiente sensíveis para o Maven
         run: |
           echo "jwt.secret=JvcyAJAjrd1ofcA+G6Sq/NcvmZdPfgafLj2uV2B/ZqU=" >> src/main/resources/application.properties
@@ -33,6 +30,9 @@ jobs:
           echo "openai.api.url=https://api.openai.com/v1/chat/completions"  >> src/main/resources/application.properties
           echo "openai.model=gpt-4.1-nano"  >> src/main/resources/application.properties
           echo "openai.api.key=sk-proj-asdasdasdasdada"  >> src/main/resources/application.properties
+
+      - name: Build com Maven
+        run: mvn clean package
 
       - name: Rodar testes
         run: mvn test --no-transfer-progress
