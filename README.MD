@@ -7,6 +7,9 @@ Projeto de backend em Java com Spring Boot para geração de conteúdos educacio
 - Integração com OpenAI
 - Documentação automática da API com Swagger (OpenAPI)
 
+# Estrutura do Projeto
+![Arquitetura](learnai.png)
+
 # Instalação
 ## 1. Clone o repositório
 ```
@@ -19,6 +22,8 @@ Configure o arquivo ``src/main/resources/application.properties`` com:
 jwt.secret=uma-chave-secreta-segura-aqui
 jwt.expiration=86400000
 openai.api.key=sua-api-key-openai
+openai.api.url=https://api.openai.com/v1/chat/completions
+openai.model=gpt-4.1-nano
 ```
 ## 3. Instale as dependências e rode o projeto
 ```
